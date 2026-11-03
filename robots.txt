@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://egypt-shortdrama.top/sitemap.xml
