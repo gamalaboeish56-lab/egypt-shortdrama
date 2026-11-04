@@ -1,0 +1,10 @@
+{
+  "name": "Egypt Short Drama - أبو ندى",
+  "short_name": "AbuNada",
+  "description": "منصة الدراما القصيرة المصرية - 5 حلقات + مبدعين + تحميل أوفلاين",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07080c",
+  "theme_color": "#ff2e63",
+  "icons": []
+}
