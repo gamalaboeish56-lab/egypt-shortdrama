@@ -3,8 +3,13 @@
   "short_name": "AbuNada",
   "description": "منصة الدراما القصيرة المصرية - 5 حلقات + مبدعين + تحميل أوفلاين",
   "start_url": "/",
+  "scope": "/",
+  "lang": "ar",
+  "dir": "rtl",
   "display": "standalone",
   "background_color": "#07080c",
   "theme_color": "#ff2e63",
-  "icons": []
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
 }

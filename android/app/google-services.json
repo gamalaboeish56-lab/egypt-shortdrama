@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "157460775992",
+    "project_id": "egypt-shortdrama",
+    "storage_bucket": "egypt-shortdrama.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157460775992:android:16e2cc31cdc977186492cd",
+        "android_client_info": {
+          "package_name": "egypt.shortdrama.top"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157460775992-9gor1tfav1k8n21viihrl5302t585jep.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "egypt.shortdrama.top",
+            "certificate_hash": "19015f6e1bee49bfecdc97425dd65cc2146285c4"
+          }
+        },
+        {
+          "client_id": "157460775992-drh0ii0ja01a1ngg1qle9r3a4evibgef.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "egypt.shortdrama.top",
+            "certificate_hash": "f2d72ab6c5e6d31221a40e33f38aa18885631b71"
+          }
+        },
+        {
+          "client_id": "157460775992-8srf5r574hvquobit0u7im8ptvq724ju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIevIyCQv--pd2KtOcmfxrJHMDnncVrTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157460775992-8srf5r574hvquobit0u7im8ptvq724ju.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
