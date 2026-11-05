@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "egypt.shortdrama.top",
+      "sha256_cert_fingerprints": [
+        "A0:28:7C:FD:5A:DB:C2:73:8F:5F:6B:0F:D4:89:89:3B:D8:13:B3:9C:FF:31:3D:71:B3:5B:09:2C:AA:EC:E8:B1"
+      ]
+    }
+  }
+]

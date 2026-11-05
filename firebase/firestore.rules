@@ -1,0 +1,72 @@
+rules_version = '2';
+
+// قواعد أمان Firestore لـ Egypt Short Drama
+// الكولكشنز: users, subscriptions, coins, videos  +  admins (صلاحيات لوحة التحكم)
+// الأدمن = أي uid له مستند في admins/{uid}  (بيتعمل يدوي من Firebase Console)
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isMe(uid) { return signedIn() && request.auth.uid == uid; }
+    function isAdmin() {
+      return signedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+    function notBanned() {
+      let u = /databases/$(database)/documents/users/$(request.auth.uid);
+      return !exists(u) || get(u).data.get('banned', false) == false;
+    }
+
+    match /admins/{uid} {
+      allow read: if isMe(uid) || isAdmin();
+      allow write: if false; // من الكونسول فقط
+    }
+
+    // ---------- users ----------
+    match /users/{uid} {
+      allow read: if isMe(uid) || isAdmin();
+      // أول تسجيل: الرصيد صفر، مش موقوف، من غير باقة
+      allow create: if isMe(uid)
+        && request.resource.data.get('coins', 0) == 0
+        && request.resource.data.get('banned', false) == false
+        && request.resource.data.get('plan', null) == null;
+      // المستخدم يعدل بياناته العامة بس (مش الرصيد ولا الحظر ولا الباقة)
+      allow update: if isAdmin() || (isMe(uid)
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['name', 'email', 'phone', 'photo', 'platform', 'lastSeen', 'fcmToken']));
+      allow delete: if isAdmin();
+    }
+
+    // ---------- subscriptions (طلبات الدفع اليدوي + سجل الاشتراكات) ----------
+    match /subscriptions/{id} {
+      function validPlan(d) {
+        let prices = {'basic': 50, 'pro': 100, 'star': 200};
+        let coins  = {'basic': 100, 'pro': 250, 'star': 600};
+        let bonus  = {'basic': 0, 'pro': 50, 'star': 0};
+        return d.planId in prices
+          && d.priceEgp == prices[d.planId]
+          && d.coins == coins[d.planId]
+          && d.bonus == bonus[d.planId];
+      }
+      allow read: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+      allow create: if signedIn() && notBanned()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.status == 'pending'
+        && request.resource.data.method in ['instapay', 'vodafone']
+        && validPlan(request.resource.data)
+        && (request.resource.data.screenshot == null || request.resource.data.screenshot.size() < 700000);
+      allow update, delete: if isAdmin();
+    }
+
+    // ---------- coins (سجل حركة العملات) ----------
+    match /coins/{id} {
+      allow read: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+      allow write: if isAdmin();
+    }
+
+    // ---------- videos ----------
+    match /videos/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}

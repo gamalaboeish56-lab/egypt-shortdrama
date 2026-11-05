@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Egypt Short Drama</string>
+    <string name="notif_channel_id">general</string>
+    <string name="notif_channel_name">إشعارات عامة</string>
+    <string name="coins_fmt">🪙 %1$d</string>
+    <string name="offline_title">مفيش إنترنت</string>
+</resources>
